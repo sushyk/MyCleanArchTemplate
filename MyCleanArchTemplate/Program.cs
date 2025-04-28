@@ -1,6 +1,7 @@
 using MyCleanArchTemplate.Application;
 using MyCleanArchTemplate.Adapter.WebApi;
 using MyCleanArchTemplate.Adapter.Persistence;
+using MyCleanArchTemplate.Infrastructure;
 using MyCleanArchTemplate.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddApplication()
     .AddPresentation()
-    .AddPersistence();
+    .AddPersistence()
+    .AddInfrastructure();
 
 builder.ConfigureOpenTelemetry();
 
@@ -24,6 +26,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapHealthChecks("health");
 
 app.MapWeatherEndpoints();
 
