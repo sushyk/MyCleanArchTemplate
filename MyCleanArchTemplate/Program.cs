@@ -33,7 +33,7 @@ app.MapHealthChecks("health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
-app.MapWeatherEndpoints();
+app.MapAllEndpoints();
 
 app.Run();
 

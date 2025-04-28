@@ -2,11 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCleanArchTemplate.Adapter.WebApi;
 
@@ -16,13 +11,13 @@ internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary
 }
 
 
-public static class WeatherEndpoints
+internal static class WeatherEndpoints
 {
     static string[] summaries = [
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     ];
 
-    public static void MapWeatherEndpoints(this IEndpointRouteBuilder app)
+    internal static void MapWeatherEndpoints(this IEndpointRouteBuilder app)
     {
         app.MapGet("/weatherforecast", (ILoggerFactory loggerFactory) =>
         {
