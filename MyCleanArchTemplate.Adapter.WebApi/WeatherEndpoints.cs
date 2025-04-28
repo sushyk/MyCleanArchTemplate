@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCleanArchTemplate.Presentation;
+namespace MyCleanArchTemplate.Adapter.WebApi;
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {

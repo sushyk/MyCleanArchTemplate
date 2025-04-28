@@ -14,9 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Domain"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Application", "MyCleanArchTemplate.Application\MyCleanArchTemplate.Application.csproj", "{3A7CCAE9-F00B-4040-BBF9-DF68A3A26CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Persistence", "MyCleanArchTemplate.Persistence\MyCleanArchTemplate.Persistence.csproj", "{30215225-63B3-4CFA-BAA7-F4DAFB246544}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Adapter.Persistence", "MyCleanArchTemplate.Adapter.Persistence\MyCleanArchTemplate.Adapter.Persistence.csproj", "{30215225-63B3-4CFA-BAA7-F4DAFB246544}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Presentation", "MyCleanArchTemplate.Presentation\MyCleanArchTemplate.Presentation.csproj", "{40E42DBF-F2C7-48A1-9EA1-1E50EAD65743}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Adapter.WebApi", "MyCleanArchTemplate.Adapter.WebApi\MyCleanArchTemplate.Adapter.WebApi.csproj", "{40E42DBF-F2C7-48A1-9EA1-1E50EAD65743}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8B2067DC-960E-4458-9A40-41C1F8FC8326}"
 EndProject

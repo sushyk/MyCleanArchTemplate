@@ -1,6 +1,6 @@
 using MyCleanArchTemplate.Application;
-using MyCleanArchTemplate.Presentation;
-using MyCleanArchTemplate.Persistence;
+using MyCleanArchTemplate.Adapter.WebApi;
+using MyCleanArchTemplate.Adapter.Persistence;
 using MyCleanArchTemplate.Web;
 
 var builder = WebApplication.CreateBuilder(args);

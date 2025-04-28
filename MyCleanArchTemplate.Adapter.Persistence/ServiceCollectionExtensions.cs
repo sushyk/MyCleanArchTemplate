@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MyCleanArchTemplate.Persistence;
+namespace MyCleanArchTemplate.Adapter.Persistence;
 
 public static class ServiceCollectionExtensions
 {

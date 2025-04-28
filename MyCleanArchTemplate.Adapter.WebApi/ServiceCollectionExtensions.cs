@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MyCleanArchTemplate.Presentation
+namespace MyCleanArchTemplate.Adapter.WebApi
 {
     public static class ServiceCollectionExtensions
     {

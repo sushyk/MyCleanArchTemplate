@@ -26,8 +26,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyCleanArchTemplate.Application\MyCleanArchTemplate.Application.csproj" />
-    <ProjectReference Include="..\MyCleanArchTemplate.Presentation\MyCleanArchTemplate.Presentation.csproj" />
-    <ProjectReference Include="..\MyCleanArchTemplate.Persistence\MyCleanArchTemplate.Persistence.csproj" />
+    <ProjectReference Include="..\MyCleanArchTemplate.Adapter.WebApi\MyCleanArchTemplate.Adapter.WebApi.csproj" />
+    <ProjectReference Include="..\MyCleanArchTemplate.Adapter.Persistence\MyCleanArchTemplate.Adapter.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
