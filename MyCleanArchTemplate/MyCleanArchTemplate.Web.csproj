@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -12,6 +12,12 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.15" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyCleanArchTemplate.Application\MyCleanArchTemplate.Application.csproj" />
+    <ProjectReference Include="..\MyCleanArchTemplate.Presentation\MyCleanArchTemplate.Presentation.csproj" />
+    <ProjectReference Include="..\MyCleanArchTemplate.Persistence\MyCleanArchTemplate.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

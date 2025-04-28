@@ -3,11 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MyCleanArchTemplate.Application;
 
-public static class ApplicationServiceCollectionExtensions
+public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        var assembly = typeof(ApplicationServiceCollectionExtensions).Assembly;
+        var assembly = typeof(ServiceCollectionExtensions).Assembly;
 
         services.AddMediator(options => 
             options.ServiceLifetime = ServiceLifetime.Scoped);

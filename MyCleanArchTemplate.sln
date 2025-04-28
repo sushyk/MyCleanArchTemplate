@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Root", "MyCleanArchTemplate\MyCleanArchTemplate.Root.csproj", "{ABF8A20C-A0E3-4E5C-A721-2CABB8E0785A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Web", "MyCleanArchTemplate\MyCleanArchTemplate.Web.csproj", "{ABF8A20C-A0E3-4E5C-A721-2CABB8E0785A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Domain"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Application", "MyCleanArchTemplate.Application\MyCleanArchTemplate.Application.csproj", "{3A7CCAE9-F00B-4040-BBF9-DF68A3A26CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Persistence", "MyCleanArchTemplate.Infrastructure\MyCleanArchTemplate.Persistence.csproj", "{30215225-63B3-4CFA-BAA7-F4DAFB246544}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Persistence", "MyCleanArchTemplate.Persistence\MyCleanArchTemplate.Persistence.csproj", "{30215225-63B3-4CFA-BAA7-F4DAFB246544}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Presentation", "MyCleanArchTemplate.Presentation\MyCleanArchTemplate.Presentation.csproj", "{40E42DBF-F2C7-48A1-9EA1-1E50EAD65743}"
 EndProject
