@@ -3,6 +3,7 @@ using MyCleanArchTemplate.Adapter.WebApi;
 using MyCleanArchTemplate.Adapter.Persistence;
 using MyCleanArchTemplate.Infrastructure;
 using MyCleanArchTemplate.Web;
+using HealthChecks.UI.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapHealthChecks("health");
+app.MapHealthChecks("health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.MapWeatherEndpoints();
 
