@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MyCleanArchTemplate.Adapter.WebApi;
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+internal record WeatherForecast(string city, DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
@@ -19,22 +19,23 @@ internal static class WeatherEndpoints
 
     internal static void MapWeatherEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/weatherforecast", (ILoggerFactory loggerFactory) =>
+        app.MapGet("/weatherforecast", (string city, int days, ILoggerFactory loggerFactory) =>
         {
             var logger = loggerFactory.CreateLogger("WeatherEndpoints");
            
-            var forecast = Enumerable.Range(1, 5).Select(index =>
+            var forecasts = Enumerable.Range(1, days).Select(index =>
                 new WeatherForecast
                 (
+                    city,
                     DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                     Random.Shared.Next(-20, 55),
                     summaries[Random.Shared.Next(summaries.Length)]
                 ))
                 .ToArray();
 
-            logger.LogInformation("Temperature in celsius is {temp}", forecast[0].TemperatureC);
+            logger.LogInformation("Retrieved {WeatherCount} weather forecasts for {City}", forecasts.Length, city);
 
-            return Results.Ok(forecast);
+            return Results.Ok(forecasts);
         })
         .WithName("GetWeatherForecast");
     }
