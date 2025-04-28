@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +22,12 @@ public static class WeatherEndpoints
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     ];
 
-    public static void MapWeatherEndpoints(this WebApplication app)
+    public static void MapWeatherEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/weatherforecast", () =>
+        app.MapGet("/weatherforecast", (ILoggerFactory loggerFactory) =>
         {
+            var logger = loggerFactory.CreateLogger("WeatherEndpoints");
+           
             var forecast = Enumerable.Range(1, 5).Select(index =>
                 new WeatherForecast
                 (
@@ -31,7 +36,10 @@ public static class WeatherEndpoints
                     summaries[Random.Shared.Next(summaries.Length)]
                 ))
                 .ToArray();
-            return forecast;
+
+            logger.LogInformation("Temperature in celsius is {temp}", forecast[0].TemperatureC);
+
+            return Results.Ok(forecast);
         })
         .WithName("GetWeatherForecast");
     }

@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Web", "MyCleanArchTemplate\MyCleanArchTemplate.Web.csproj", "{ABF8A20C-A0E3-4E5C-A721-2CABB8E0785A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		MyCleanArchTemplate\docker-compose.yaml = MyCleanArchTemplate\docker-compose.yaml
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCleanArchTemplate.Domain", "MyCleanArchTemplate.Domain\MyCleanArchTemplate.Domain.csproj", "{D75073AB-E00B-4591-83D4-BCE7A2A542A0}"
 EndProject

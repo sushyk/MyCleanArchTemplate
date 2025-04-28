@@ -1,13 +1,19 @@
 using MyCleanArchTemplate.Application;
 using MyCleanArchTemplate.Presentation;
 using MyCleanArchTemplate.Persistence;
+using MyCleanArchTemplate.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddApplication().AddPresentation().AddPersistence();
+builder.Services
+    .AddApplication()
+    .AddPresentation()
+    .AddPersistence();
+
+builder.ConfigureOpenTelemetry();
 
 var app = builder.Build();
 
