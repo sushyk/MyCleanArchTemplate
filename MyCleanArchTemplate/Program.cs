@@ -4,8 +4,11 @@ using MyCleanArchTemplate.Adapter.Persistence;
 using MyCleanArchTemplate.Infrastructure;
 using MyCleanArchTemplate.Web;
 using HealthChecks.UI.Client;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.ConfigureOpenTelemetry();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,8 +18,6 @@ builder.Services
     .AddPresentation()
     .AddPersistence()
     .AddInfrastructure();
-
-builder.ConfigureOpenTelemetry();
 
 var app = builder.Build();
 
@@ -32,6 +33,8 @@ app.MapHealthChecks("health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
+
+app.UseSerilogRequestLogging();
 
 app.MapAllEndpoints();
 

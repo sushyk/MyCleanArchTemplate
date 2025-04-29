@@ -2,25 +2,32 @@
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Serilog;
+using Serilog.Sinks.OpenTelemetry;
 
 namespace MyCleanArchTemplate.Web;
 
 public static class OpenTelemetry
 {
-    public static IHostApplicationBuilder ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
+    public static WebApplicationBuilder ConfigureOpenTelemetry(this WebApplicationBuilder builder)
+    {
+        return builder.ConfigureOpenTelemetryMetricsAndTracing().ConfigureSerilogLoggingForOpenTelemetry();
+    }
+
+    private static WebApplicationBuilder ConfigureSerilogLoggingForOpenTelemetry(this WebApplicationBuilder builder)
     {
         builder.Logging.ClearProviders();
-        builder.Logging.AddOpenTelemetry(x =>
+        builder.Host.UseSerilog((context, config) =>
         {
-            x.IncludeScopes = true;
-            x.IncludeFormattedMessage = true;
-
-            if (builder.Environment.IsDevelopment())
-            {
-                x.AddConsoleExporter();
-            }
+            config.ReadFrom.Configuration(context.Configuration);
         });
 
+        return builder;
+    }
+
+
+    private static WebApplicationBuilder ConfigureOpenTelemetryMetricsAndTracing(this WebApplicationBuilder builder)
+    {
         builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource =>
             {
@@ -31,15 +38,12 @@ public static class OpenTelemetry
                     ["deployment.environment"] = builder.Environment.EnvironmentName
                 });
             })
-            .WithLogging(logging =>
-            {
-                logging.AddOtlpExporter();
-            })
             .WithMetrics(metrics =>
             {
                 metrics.AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()
-                    .AddHttpClientInstrumentation();
+                    .AddHttpClientInstrumentation()
+                    .AddSqlClientInstrumentation();
 
                 metrics.AddOtlpExporter();
             })
@@ -52,7 +56,8 @@ public static class OpenTelemetry
 
                 tracing.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
-                    .AddEntityFrameworkCoreInstrumentation();
+                    .AddEntityFrameworkCoreInstrumentation()
+                    .AddSqlClientInstrumentation();
 
                 tracing.AddOtlpExporter();
             });
