@@ -1,6 +1,6 @@
 ﻿namespace MyCleanArchTemplate.Domain
 {
-    public class Class1
+    public class Entity
     {
 
     }
