@@ -35,7 +35,7 @@ public static class OpenTelemetry
                 resource.AddTelemetrySdk();
                 resource.AddAttributes(new Dictionary<string, object>()
                 {
-                    ["deployment.environment"] = builder.Environment.EnvironmentName
+                    ["deployment.environment.name"] = builder.Environment.EnvironmentName
                 });
             })
             .WithMetrics(metrics =>
