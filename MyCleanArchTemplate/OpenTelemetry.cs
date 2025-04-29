@@ -31,11 +31,12 @@ public static class OpenTelemetry
         builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource =>
             {
-                resource.AddService("MyCleanArchTemplate.Api");
+                resource.AddService(builder.Environment.ApplicationName);
                 resource.AddTelemetrySdk();
                 resource.AddAttributes(new Dictionary<string, object>()
                 {
-                    ["deployment.environment.name"] = builder.Environment.EnvironmentName
+                    ["deployment.environment.name"] = builder.Environment.EnvironmentName,
+                    ["host.name"] = Environment.MachineName
                 });
             })
             .WithMetrics(metrics =>
