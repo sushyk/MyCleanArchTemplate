@@ -24,6 +24,7 @@ public class AppDbContext : DbContext
         {
             builder.ToTable("Customer");
             builder.HasKey(e => e.CustomerId);
+            builder.Property(e => e.CustomerId).UseIdentityAlwaysColumn();
             builder.Property(c => c.Name).IsRequired().HasMaxLength(50);
             builder.Property(c => c.Email).IsRequired().HasMaxLength(50);
             builder.Property(c => c.CreatedDate).IsRequired().HasDefaultValueSql("NOW()");

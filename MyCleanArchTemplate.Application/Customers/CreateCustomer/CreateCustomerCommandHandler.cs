@@ -15,6 +15,7 @@ public sealed class CreateCustomerCommandHandler(
         {
             Name = command.Name,
             Email = command.Email,
+            CreatedDate = DateTime.UtcNow
         };
         customerRepository.CreateCustomer(newCustomer);
 
