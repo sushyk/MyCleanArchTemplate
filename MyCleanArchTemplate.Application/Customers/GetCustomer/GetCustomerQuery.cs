@@ -3,4 +3,4 @@ using MyCleanArchTemplate.Domain.Customers;
 
 namespace MyCleanArchTemplate.Application.Customers.GetCustomer;
 
-public sealed record GetCustomerQuery(long customerId) : IQuery<Customer>;
+public sealed record GetCustomerQuery(long CustomerId) : IQuery<Customer>;
