@@ -7,3 +7,13 @@
   environment:
    - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
 
+ postgresDb:
+  image: postgres:17
+  ports:
+   - "5432:5432"
+  environment:
+   - POSTGRES_PASSWORD=mysecretpassword
+   - POSTGRES_DB=MyCleanArchTemplateDB 
+
+
+
