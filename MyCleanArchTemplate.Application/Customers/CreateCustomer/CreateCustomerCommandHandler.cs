@@ -10,10 +10,15 @@ public sealed class CreateCustomerCommandHandler(
 {
     public async Task<Customer> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
     {
-        customerRepository.CreateCustomer(command.Customer);
+        Customer newCustomer = new()
+        {
+            Name = command.Name,
+            Email = command.Email,
+        };
+        customerRepository.CreateCustomer(newCustomer);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return command.Customer;
+        return newCustomer;
     }
 }
