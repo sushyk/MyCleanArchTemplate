@@ -9,9 +9,11 @@ public static class ServiceCollectionExtensions
     {
         var assembly = typeof(ServiceCollectionExtensions).Assembly;
 
-        services.AddMediator(options => 
-            options.ServiceLifetime = ServiceLifetime.Scoped);
-
+        services.AddMediator(options =>
+        {
+            options.ServiceLifetime = ServiceLifetime.Scoped;
+        });
+          
         services.AddValidatorsFromAssembly(assembly);
 
         return services;

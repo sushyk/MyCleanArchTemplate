@@ -4,12 +4,12 @@
     {
         public Result(bool isSuccess, Error error)
         {
-            if (isSuccess && error != Error.None)
+            if (isSuccess && error.Type == ErrorType.Failure)
             {
                 throw new ArgumentException("Error should be None if Result is Success", nameof(error));
             }
 
-            if (!isSuccess && error == Error.None)
+            if (!isSuccess && error.Type == ErrorType.None)
             {
                 throw new ArgumentException("Error should not be None if Result is Failure", nameof(error));
             }
@@ -30,7 +30,7 @@
 
         public static Result Failure(Error error) => new(false, error);
 
-        public static Result<TValue> Failure<TValue>(Error error) => new(default, false, Error.None);
+        public static Result<TValue> Failure<TValue>(Error error) => new(default, false, error);
     }
 
     public class Result<TValue> : Result

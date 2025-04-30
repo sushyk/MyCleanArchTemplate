@@ -22,6 +22,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyCleanArchTemplate.Application\MyCleanArchTemplate.Application.csproj" />
+    <ProjectReference Include="..\MyCleanArchTemplate.Core.Shared\MyCleanArchTemplate.Core.Shared.csproj" />
+    <ProjectReference Include="..\MyCleanArchTemplate.Domain\MyCleanArchTemplate.Domain.csproj" />
   </ItemGroup>
 
 </Project>

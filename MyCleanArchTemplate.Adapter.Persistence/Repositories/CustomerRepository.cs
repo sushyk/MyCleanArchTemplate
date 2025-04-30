@@ -18,6 +18,6 @@ public sealed class CustomerRepository(
 
     public async Task<Customer> GetById(long customerId, CancellationToken cancellationToken)
     {
-        return await dbContext.Customers.SingleAsync(x => x.CustomerId == customerId, cancellationToken);
+        return await dbContext.Customers.SingleOrDefaultAsync(x => x.CustomerId == customerId, cancellationToken);
     }
 }

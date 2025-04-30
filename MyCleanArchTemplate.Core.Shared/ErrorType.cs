@@ -8,6 +8,7 @@ namespace MyCleanArchTemplate.Core.Shared;
 
 public enum ErrorType
 {
+    None,
     Failure,
     NotFound,
     Validation
