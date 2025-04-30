@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyCleanArchTemplate.Core.Shared\MyCleanArchTemplate.Core.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

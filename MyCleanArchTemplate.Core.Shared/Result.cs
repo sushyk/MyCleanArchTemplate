@@ -1,26 +1,45 @@
-﻿namespace MyCleanArchTemplate.Core.Shared;
-
-public class Result
+﻿namespace MyCleanArchTemplate.Core.Shared
 {
-    private Result(bool isSuccess, Error error)
+    public class Result
     {
-        if (isSuccess && error != Error.None ||
-            !isSuccess && error == Error.None)
+        public Result(bool isSuccess, Error error)
         {
-            throw new ArgumentNullException(nameof(error), "Invalid error");
+            if (isSuccess && error != Error.None)
+            {
+                throw new ArgumentException("Error should be None if Result is Success", nameof(error));
+            }
+
+            if (!isSuccess && error == Error.None)
+            {
+                throw new ArgumentException("Error should not be None if Result is Failure", nameof(error));
+            }
+
+            IsSuccess = isSuccess;
+            Error = error;
         }
 
-        IsSuccess = isSuccess;
-        Error = error;
+        public bool IsSuccess { get; set; }
+
+        public bool IsFailure => !IsSuccess;
+
+        public Error Error { get; }
+
+        public static Result Success() => new(true, Error.None);
+
+        public static Result<TValue> Success<TValue>(TValue value) => new(value, true, Error.None);
+
+        public static Result Failure(Error error) => new(false, error);
+
+        public static Result<TValue> Failure<TValue>(Error error) => new(default, false, Error.None);
     }
 
-    public bool IsSuccess { get; set; }
+    public class Result<TValue> : Result
+    {
+        public TValue? Value { get; private set; }
 
-    public bool IsFailure => !IsSuccess;
-
-    public Error Error { get; }
-
-    public static Result Success() => new(true, Error.None);
-
-    public static Result Failure(Error error) => new(false, error);
+        public Result(TValue value, bool isSuccess, Error error) : base(isSuccess, error)
+        {
+            Value = value;
+        }
+    }
 }
