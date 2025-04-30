@@ -1,5 +1,4 @@
-﻿//using MyCleanArchTemplate.Application.Abstractions.Messaging;
-using Mediator;
+﻿using MyCleanArchTemplate.Application.Abstractions.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace MyCleanArchTemplate.Application.UseCases.Followers.StartFollowing;
 
 public sealed record StartFollowingCommand(Guid userId, Guid FollowerId) : ICommand;
 
-internal sealed class StartFollowingCommandHandler(IUserRepository userRepository): IRequestHandler<StartFollowingCommand>
+internal sealed class StartFollowingCommandHandler(IUserRepository userRepository): ICommandHandler<StartFollowingCommand>
 {
 
     public async Task Handle(StartFollowingCommand command, CancellationToken cancellationToken)
@@ -19,18 +18,8 @@ internal sealed class StartFollowingCommandHandler(IUserRepository userRepositor
 
         if (user is null)
         {
-            return Result(new Exception("The user is not found"));
+            //return Result(new Exception("The user is not found"));
         }
-    }
-
-    ValueTask<Unit> Handle(StartFollowingCommand command, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    ValueTask<Unit> IRequestHandler<StartFollowingCommand, Unit>.Handle(StartFollowingCommand request, CancellationToken cancellationToken)
-    {
-        return Unit.Value;
     }
 }
 
