@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Routing;
+using MyCleanArchTemplate.Adapter.WebApi.Endpoints;
 
 namespace MyCleanArchTemplate.Adapter.WebApi;
 

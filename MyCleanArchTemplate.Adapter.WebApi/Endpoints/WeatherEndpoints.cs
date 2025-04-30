@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 
-namespace MyCleanArchTemplate.Adapter.WebApi;
+namespace MyCleanArchTemplate.Adapter.WebApi.Endpoints;
 
 internal record WeatherForecast(string city, DateOnly Date, int TemperatureC, string? Summary)
 {

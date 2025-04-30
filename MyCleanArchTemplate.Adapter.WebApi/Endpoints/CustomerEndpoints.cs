@@ -9,7 +9,7 @@ using MyCleanArchTemplate.Core.Shared;
 using MyCleanArchTemplate.Domain.Customers;
 using System.Reflection.Metadata.Ecma335;
 
-namespace MyCleanArchTemplate.Adapter.WebApi;
+namespace MyCleanArchTemplate.Adapter.WebApi.Endpoints;
 
 internal static class CustomerEndpoints
 {
