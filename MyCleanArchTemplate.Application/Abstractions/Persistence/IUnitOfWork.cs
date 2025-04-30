@@ -1,4 +1,4 @@
-﻿namespace MyCleanArchTemplate.Domain.Abstractions.Persistence;
+﻿namespace MyCleanArchTemplate.Application.Abstractions.Persistence;
 
 public interface IUnitOfWork
 {

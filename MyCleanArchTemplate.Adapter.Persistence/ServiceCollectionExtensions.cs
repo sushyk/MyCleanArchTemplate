@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MyCleanArchTemplate.Domain.Abstractions.Persistence;
+using MyCleanArchTemplate.Adapter.Persistence.Repositories;
+using MyCleanArchTemplate.Application.Abstractions.Persistence;
+using MyCleanArchTemplate.Domain.Customers;
 
 namespace MyCleanArchTemplate.Adapter.Persistence;
 
@@ -15,6 +17,8 @@ public static class ServiceCollectionExtensions
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         return services;
     }

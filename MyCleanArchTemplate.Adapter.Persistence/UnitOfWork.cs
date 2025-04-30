@@ -1,4 +1,4 @@
-﻿using MyCleanArchTemplate.Domain.Abstractions.Persistence;
+﻿using MyCleanArchTemplate.Application.Abstractions.Persistence;
 
 namespace MyCleanArchTemplate.Adapter.Persistence;
 

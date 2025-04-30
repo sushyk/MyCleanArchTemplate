@@ -1,4 +1,4 @@
-﻿namespace MyCleanArchTemplate.Domain.Entities;
+﻿namespace MyCleanArchTemplate.Domain.Customers;
 
 public class Customer
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using MyCleanArchTemplate.Domain.Entities;
+using MyCleanArchTemplate.Domain.Customers;
 
 namespace MyCleanArchTemplate.Adapter.Persistence;
 
