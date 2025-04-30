@@ -1,4 +1,5 @@
 ﻿using Mediator;
+using Microsoft.Extensions.Logging;
 using MyCleanArchTemplate.Application.Abstractions.Messaging;
 using MyCleanArchTemplate.Application.Abstractions.Persistence;
 using MyCleanArchTemplate.Domain.Customers;
@@ -7,7 +8,8 @@ namespace MyCleanArchTemplate.Application.Customers.CreateCustomer;
 
 public sealed class CreateCustomerCommandHandler(
     ICustomerRepository customerRepository,
-    IUnitOfWork unitOfWork) : Mediator.IRequestHandler<CreateCustomerCommand, Customer>
+    IUnitOfWork unitOfWork,
+    ILogger<CreateCustomerCommandHandler> logger) : Mediator.IRequestHandler<CreateCustomerCommand, Customer>
 {
     public async ValueTask<Customer> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
     {
@@ -20,6 +22,8 @@ public sealed class CreateCustomerCommandHandler(
         customerRepository.CreateCustomer(newCustomer);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
+
+        logger.LogInformation("Created customer with Id {CustomerId} and Email {CustomerEmail}", newCustomer.CustomerId, newCustomer.Email);
 
         return newCustomer;
     }
