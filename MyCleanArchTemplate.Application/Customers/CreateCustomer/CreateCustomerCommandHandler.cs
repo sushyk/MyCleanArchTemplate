@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using Mediator;
+﻿using Mediator;
 using Microsoft.Extensions.Logging;
 using MyCleanArchTemplate.Application.Abstractions.Persistence;
 using MyCleanArchTemplate.Core.Shared;
@@ -10,9 +9,9 @@ namespace MyCleanArchTemplate.Application.Customers.CreateCustomer;
 public sealed class CreateCustomerCommandHandler(
     ICustomerRepository customerRepository,
     IUnitOfWork unitOfWork,
-    ILogger<CreateCustomerCommandHandler> logger) : ICommandHandler<CreateCustomerCommand, Result<Customer>>
+    ILogger<CreateCustomerCommandHandler> logger) : ICommandHandler<CreateCustomerCommand, Result<CustomerDto>>
 {
-    public async ValueTask<Result<Customer>> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
+    public async ValueTask<Result<CustomerDto>> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
     {
         Customer newCustomer = new()
         {
@@ -26,6 +25,6 @@ public sealed class CreateCustomerCommandHandler(
 
         logger.LogInformation("Created customer with Id {CustomerId} and Email {CustomerEmail}", newCustomer.CustomerId, newCustomer.Email);
 
-        return Result.Success(newCustomer);
+        return Result.Success(new CustomerDto(newCustomer.CustomerId, newCustomer.Name, newCustomer.Email));
     }
 }

@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using MyCleanArchTemplate.Adapter.WebApi.Requests;
+using MyCleanArchTemplate.Application.Customers;
 using MyCleanArchTemplate.Application.Customers.CreateCustomer;
 using MyCleanArchTemplate.Application.Customers.GetCustomer;
 using MyCleanArchTemplate.Core.Shared;
 using MyCleanArchTemplate.Domain.Customers;
+using System.Reflection.Metadata.Ecma335;
 
 namespace MyCleanArchTemplate.Adapter.WebApi.Endpoints;
 
@@ -17,14 +19,18 @@ internal static class CustomerEndpoints
         app.MapGet("/customers/{customerId:long}", async (long customerId, ISender sender, CancellationToken token) =>
         {
             GetCustomerQuery query = new(customerId);
-            Result<Customer> customerResult = await sender.Send(query, token);
+            Result<CustomerDto> customerResult = await sender.Send(query, token);
 
-            if (customerResult.IsFailure)
+            if (customerResult.IsSuccess)
             {
-                return Results.NotFound(customerResult.Error);
+                return Results.Ok(customerResult.Value);
             }
 
-            return Results.Ok(customerResult.Value);
+            return customerResult.Error.Type switch
+            {
+                ErrorType.NotFound => Results.NotFound(customerResult.Error)
+            };
+
         })
         .WithName("GetCustomer")
         .WithTags("Customers");
@@ -32,7 +38,7 @@ internal static class CustomerEndpoints
         app.MapPost("customers", async (ISender sender, CreateCustomerRequest request, CancellationToken token) =>
         {
             CreateCustomerCommand command = new(request.Name, request.Email);
-            Result<Customer> customerResult = await sender.Send(command, token);
+            Result<CustomerDto> customerResult = await sender.Send(command, token);
 
             if (customerResult.IsFailure)
             {
