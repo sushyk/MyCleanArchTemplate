@@ -43,5 +43,11 @@ internal static class CustomerEndpoints
         })
         .WithName("CreateCustomer")
         .WithTags("Customers");
+
+        app.MapPost("customers/exception", () =>
+        {
+            throw new Exception("This is a test exception");
+        })
+       .WithTags("Customers");
     }
 }

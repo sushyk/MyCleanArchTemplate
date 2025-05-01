@@ -5,6 +5,7 @@ using MyCleanArchTemplate.Infrastructure;
 using MyCleanArchTemplate.Web;
 using HealthChecks.UI.Client;
 using Serilog;
+using MyCleanArchTemplate.Web.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services
     .AddPresentation()
     .AddPersistence(builder.Configuration)
     .AddInfrastructure();
+;
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
