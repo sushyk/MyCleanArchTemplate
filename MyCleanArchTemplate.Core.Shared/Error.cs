@@ -2,7 +2,7 @@
 
 public record Error
 {
-    public Error(string code, string description, ErrorType type)
+    protected Error(string code, string description, ErrorType type)
     {
         Code = code;
         Description = description;
@@ -15,9 +15,11 @@ public record Error
 
     public ErrorType Type { get; }
 
-    public static readonly Error None = new(string.Empty, string.Empty, ErrorType.None);
-
     public static Error Failure(string code, string description) => new(code, description, ErrorType.Failure);
 
     public static Error NotFound(string code, string description) => new(code, description, ErrorType.NotFound);
+
+    public static Error Validation(string code, string description) => new(code, description, ErrorType.Validation);
+
+    public static Error Conflict(string code, string description) => new(code, description, ErrorType.Conflict);
 }

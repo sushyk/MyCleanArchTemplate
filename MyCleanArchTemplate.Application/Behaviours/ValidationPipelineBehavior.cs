@@ -26,7 +26,7 @@ public class ValidationPipelineBehavior<TMessage, TResponse> : IPipelineBehavior
             .Select(validator => validator.Validate(request))
             .SelectMany(validationResult => validationResult.Errors)
             .Where(validationFailure => validationFailure is not null)
-            .Select(failure => new Error(failure.PropertyName, failure.ErrorMessage, ErrorType.Validation))
+            .Select(failure => Error.Validation(failure.PropertyName, failure.ErrorMessage))
             .Distinct()];
 
         if (errors.Length > 0)
