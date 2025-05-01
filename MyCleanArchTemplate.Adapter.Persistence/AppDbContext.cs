@@ -28,6 +28,7 @@ public class AppDbContext : DbContext
             builder.Property(c => c.Name).IsRequired().HasMaxLength(50);
             builder.Property(c => c.Email).IsRequired().HasMaxLength(50);
             builder.Property(c => c.CreatedDate).IsRequired().HasDefaultValueSql("NOW()");
+            builder.HasIndex(c => c.Email).IsUnique();
         });
     }
 }
