@@ -7,8 +7,6 @@ using MyCleanArchTemplate.Application.Customers;
 using MyCleanArchTemplate.Application.Customers.CreateCustomer;
 using MyCleanArchTemplate.Application.Customers.GetCustomer;
 using MyCleanArchTemplate.Core.Shared;
-using MyCleanArchTemplate.Domain.Customers;
-using System.Reflection.Metadata.Ecma335;
 
 namespace MyCleanArchTemplate.Adapter.WebApi.Endpoints;
 
@@ -21,16 +19,12 @@ internal static class CustomerEndpoints
             GetCustomerQuery query = new(customerId);
             Result<CustomerDto> customerResult = await sender.Send(query, token);
 
-            if (customerResult.IsSuccess)
+            if (customerResult.IsFailure)
             {
-                return Results.Ok(customerResult.Value);
+                return customerResult.ToProblemDetails();
             }
 
-            return customerResult.Error.Type switch
-            {
-                ErrorType.NotFound => Results.NotFound(customerResult.Error)
-            };
-
+            return Results.Ok(customerResult.Value);
         })
         .WithName("GetCustomer")
         .WithTags("Customers");
@@ -42,7 +36,7 @@ internal static class CustomerEndpoints
 
             if (customerResult.IsFailure)
             {
-                return Results.InternalServerError(customerResult.Error);
+                return customerResult.ToProblemDetails();
             }
 
             return Results.Ok(customerResult.Value);
