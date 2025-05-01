@@ -7,7 +7,6 @@ using MyCleanArchTemplate.Application.Customers.CreateCustomer;
 using MyCleanArchTemplate.Application.Customers.GetCustomer;
 using MyCleanArchTemplate.Core.Shared;
 using MyCleanArchTemplate.Domain.Customers;
-using System.Reflection.Metadata.Ecma335;
 
 namespace MyCleanArchTemplate.Adapter.WebApi.Endpoints;
 
@@ -22,7 +21,7 @@ internal static class CustomerEndpoints
 
             if (customerResult.IsFailure)
             {
-                return Results.NotFound(customerResult.Error.Description);
+                return Results.NotFound(customerResult.Error);
             }
 
             return Results.Ok(customerResult.Value);
@@ -33,9 +32,14 @@ internal static class CustomerEndpoints
         app.MapPost("customers", async (ISender sender, CreateCustomerRequest request, CancellationToken token) =>
         {
             CreateCustomerCommand command = new(request.Name, request.Email);
-            var newCustomer = await sender.Send(command, token);
+            Result<Customer> customerResult = await sender.Send(command, token);
 
-            return Results.Ok(newCustomer);
+            if (customerResult.IsFailure)
+            {
+                return Results.InternalServerError(customerResult.Error);
+            }
+
+            return Results.Ok(customerResult.Value);
         })
         .WithName("CreateCustomer")
         .WithTags("Customers");
