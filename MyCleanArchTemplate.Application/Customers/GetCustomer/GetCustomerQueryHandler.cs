@@ -6,9 +6,8 @@ namespace MyCleanArchTemplate.Application.Customers.GetCustomer;
 
 public class GetCustomerQueryHandler(
     ICustomerRepository customerRepository
-    ) : IRequestHandler<GetCustomerQuery, Result<Customer>>
+    ) : IQueryHandler<GetCustomerQuery, Result<Customer>>
 {
-
     public async ValueTask<Result<Customer>> Handle(GetCustomerQuery query, CancellationToken cancellationToken)
     {
         Customer customer = await customerRepository.GetById(query.CustomerId, cancellationToken);
