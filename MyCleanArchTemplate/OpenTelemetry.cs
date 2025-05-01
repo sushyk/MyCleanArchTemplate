@@ -1,4 +1,5 @@
-﻿using OpenTelemetry.Logs;
+﻿using Npgsql;
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -58,7 +59,8 @@ public static class OpenTelemetry
                 tracing.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddEntityFrameworkCoreInstrumentation()
-                    .AddSqlClientInstrumentation();
+                    .AddSqlClientInstrumentation()
+                    .AddNpgsql();
 
                 tracing.AddOtlpExporter();
             });
