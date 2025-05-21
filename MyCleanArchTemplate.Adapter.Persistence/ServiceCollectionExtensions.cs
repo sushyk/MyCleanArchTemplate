@@ -9,11 +9,11 @@ namespace MyCleanArchTemplate.Adapter.Persistence;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfigurationManager configurationManager)
+    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<AppDbContext>(options =>
         {
-            options.UseNpgsql(configurationManager.GetConnectionString("DefaultConnection"));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
