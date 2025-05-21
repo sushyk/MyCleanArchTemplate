@@ -5,19 +5,28 @@ using MyCleanArchTemplate.Infrastructure;
 using MyCleanArchTemplate.Web;
 using HealthChecks.UI.Client;
 using Serilog;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.ConfigureOpenTelemetry();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddApplication(builder.Configuration)
+    .AddApplication()
     .AddPresentation()
     .AddPersistence(builder.Configuration)
     .AddInfrastructure();
+
+IConnectionMultiplexer redisConnectionMultiplexer = await ConnectionMultiplexer.ConnectAsync(builder.Configuration.GetConnectionString("Redis"));
+builder.Services.AddSingleton(redisConnectionMultiplexer);
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.ConnectionMultiplexerFactory = () => Task.FromResult(redisConnectionMultiplexer);
+});
+
+builder.ConfigureOpenTelemetry();
 
 builder.Services.AddProblemDetails();
 

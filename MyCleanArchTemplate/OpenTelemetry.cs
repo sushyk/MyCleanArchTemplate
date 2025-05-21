@@ -5,6 +5,8 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Sinks.OpenTelemetry;
+using StackExchange.Redis;
+using System.Reflection.PortableExecutable;
 
 namespace MyCleanArchTemplate.Web;
 
@@ -29,7 +31,8 @@ public static class OpenTelemetry
 
     private static WebApplicationBuilder ConfigureOpenTelemetryMetricsAndTracing(this WebApplicationBuilder builder)
     {
-        builder.Services.AddOpenTelemetry()
+        builder.Services
+            .AddOpenTelemetry()
             .ConfigureResource(resource =>
             {
                 resource.AddService(builder.Environment.ApplicationName);
@@ -45,7 +48,8 @@ public static class OpenTelemetry
                 metrics.AddRuntimeInstrumentation()
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
-                    .AddSqlClientInstrumentation();
+                    .AddSqlClientInstrumentation()
+                    .AddNpgsqlInstrumentation();
 
                 metrics.AddOtlpExporter();
             })
@@ -60,7 +64,8 @@ public static class OpenTelemetry
                     .AddHttpClientInstrumentation()
                     .AddEntityFrameworkCoreInstrumentation()
                     .AddSqlClientInstrumentation()
-                    .AddNpgsql();
+                    .AddNpgsql()
+                    .AddRedisInstrumentation();
 
                 tracing.AddOtlpExporter();
             });
