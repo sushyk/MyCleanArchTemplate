@@ -20,6 +20,7 @@ public sealed class CreateCustomerCommandHandler(
             CreatedDate = DateTime.UtcNow
         };
         customerRepository.CreateCustomer(newCustomer);
+        logger.LogDebug("Customer wit email {CustomerEmail} saved in repository.", command.Email);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
