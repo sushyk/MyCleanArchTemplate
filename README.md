@@ -10,12 +10,18 @@ My clean architecture template for .NET projects
 - [ ] FluentValidation. Configure ValidationPipelineBehavior
 
 
-# Setup:
-
-1. In your terminal, cd to MyCleanArchTemplate/MyCleanArchTemplate.Web and run `docker compose up -d`.
-2. Open Package Manager Console in Visual Studio and run the command `Update-Database` to run all migrations.
+# Quick Start:
+                     
+1. In your terminal, cd to MyCleanArchTemplate/MyCleanArchTemplate.Web and run docker compose using a profile to start all serivces.
+Two profiles are available depending on what observability stack you would like to run.
+    - If you want to view telemetry in Aspire dashboard, run docker compose using the aspire profile: `docker compose --profile aspire up -d` 
+    - To shut down containers: `docker compose --profile aspire down`
+    - If you want to view telemetry in Grafana, run docker compose using the lgtm profile: `docker compose --profile lgtm up -d`
+    - To shut down containers: `docker compose --profile lgtm down`
+1. Open Package Manager Console in Visual Studio and run the command `Update-Database` to run all migrations.
 
 # Notes
 
-1. Aspire Dashboard is used to analyse telemetery from the app. Its available at localhost:18888
-2. You can access Redis Insight at localhost:8001
+1. Aspire Dashboard is available at localhost:18888
+1. Grafana is available at localhost: 3000
+1. Redis Insight is available at localhost:8001
