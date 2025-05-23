@@ -15,8 +15,10 @@ internal static class CustomerEndpoints
 {
     internal static void MapCustomerEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/customers/{customerId:long}", async (long customerId, ISender sender, CancellationToken token, ILogger logger) =>
+        app.MapGet("/customers/{customerId:long}", async (long customerId, ISender sender, CancellationToken token, ILoggerFactory loggerFactory) =>
         {
+            ILogger logger = loggerFactory.CreateLogger("CustomerEndpoints");
+
             logger.LogDebug("Creating GetCustomerQuery");
             GetCustomerQuery query = new(customerId);
 
@@ -33,8 +35,9 @@ internal static class CustomerEndpoints
         .WithName("GetCustomer")
         .WithTags("Customers");
 
-        app.MapPost("customers", async (ISender sender, CreateCustomerRequest request, CancellationToken token, ILogger logger) =>
+        app.MapPost("customers", async (ISender sender, CreateCustomerRequest request, CancellationToken token, ILoggerFactory loggerFactory) =>
         {
+            ILogger logger = loggerFactory.CreateLogger("CustomerEndpoints");
             logger.LogDebug("Creating CreateCustomerCommand");
             CreateCustomerCommand command = new(request.Name, request.Email);
 

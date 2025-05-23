@@ -7,10 +7,12 @@ internal sealed class CreateCustomerCommandValidator : AbstractValidator<CreateC
 {
     public CreateCustomerCommandValidator(ILogger<CreateCustomerCommandValidator> logger)
     {
-        logger.LogInformation("Validating CreateCustomerCommand");
+        logger.LogDebug("Beginning validation of CreateCustomerCommand");
 
         RuleFor(x => x.Name).NotEmpty().MaximumLength(50);
 
         RuleFor(x => x.Email).NotEmpty().EmailAddress().MaximumLength(50);
+
+        logger.LogDebug("Finished validation of CreateCustomerCommand");
     }
 }
