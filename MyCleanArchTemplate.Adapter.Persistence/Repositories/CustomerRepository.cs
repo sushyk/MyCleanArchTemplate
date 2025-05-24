@@ -34,7 +34,10 @@ public sealed class CustomerRepository(
                 return customer;
             }
 
-            await distributedCache.SetStringAsync(cacheKey, JsonSerializer.Serialize(customer), cancellationToken);
+            await distributedCache.SetStringAsync(cacheKey,
+                JsonSerializer.Serialize(customer),
+                new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(5)),
+                cancellationToken);
             logger.LogDebug("Set value for customer with Id {CustomerId} against {CacheKey} in cache", customerId, cacheKey);
 
             return customer;
