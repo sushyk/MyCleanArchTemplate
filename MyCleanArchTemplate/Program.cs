@@ -6,6 +6,7 @@ using MyCleanArchTemplate.Web;
 using HealthChecks.UI.Client;
 using Serilog;
 using StackExchange.Redis;
+using MyCleanArchTemplate.Adapter.Kafka;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,9 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddApplication()
     .AddPresentation()
+    .AddInfrastructure()
     .AddPersistence(builder.Configuration)
-    .AddInfrastructure();
+    .AddKafka(builder.Configuration);
 
 IConnectionMultiplexer redisConnectionMultiplexer = await ConnectionMultiplexer.ConnectAsync(builder.Configuration.GetConnectionString("Redis"));
 builder.Services.AddSingleton(redisConnectionMultiplexer);
