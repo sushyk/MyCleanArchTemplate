@@ -37,7 +37,8 @@
    image: confluentinc/confluent-local:7.9.1
    container_name: kafka
    volumes:
-     - kafka-logs:/var/lib/kafka/data
+     - kafka-data:/tmp/kraft-combined-logs
+     - kafka-secrets:/etc/kafka/secrets
    ports:
      - "9092:9092"
      - "9093:9093"
@@ -51,7 +52,8 @@
 
 volumes:
  postgres-data:
- kafka-logs:
+ kafka-data:
+ kafka-secrets:
  otel-lgtm-telemetry:
 
 
