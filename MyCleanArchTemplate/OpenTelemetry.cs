@@ -1,12 +1,10 @@
-﻿using Npgsql;
+﻿using Confluent.Kafka.Extensions.OpenTelemetry;
+using Npgsql;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
-using Serilog.Sinks.OpenTelemetry;
-using StackExchange.Redis;
-using System.Reflection.PortableExecutable;
 
 namespace MyCleanArchTemplate.Web;
 
@@ -65,7 +63,8 @@ public static class OpenTelemetry
                     .AddEntityFrameworkCoreInstrumentation()
                     .AddSqlClientInstrumentation()
                     .AddNpgsql()
-                    .AddRedisInstrumentation();
+                    .AddRedisInstrumentation()
+                    .AddConfluentKafkaInstrumentation();
 
                 tracing.AddOtlpExporter();
             });

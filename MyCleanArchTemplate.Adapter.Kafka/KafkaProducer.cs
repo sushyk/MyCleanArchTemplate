@@ -1,4 +1,5 @@
 ﻿using Confluent.Kafka;
+using Confluent.Kafka.Extensions.Diagnostics;
 using Microsoft.Extensions.Options;
 using MyCleanArchTemplate.Application.Abstractions.Messaging;
 
@@ -10,7 +11,7 @@ internal class KafkaProducer : IMessageProducer, IDisposable
 
     public KafkaProducer(IOptions<ProducerConfig> producerConfig)
     {
-        kafkaHandler = new ProducerBuilder<string, string>(producerConfig.Value).Build();
+        kafkaHandler = new ProducerBuilder<string, string>(producerConfig.Value).BuildWithInstrumentation();
     }
 
     public Task ProduceAsync(string topic, string key, string value, CancellationToken cancellationToken)
