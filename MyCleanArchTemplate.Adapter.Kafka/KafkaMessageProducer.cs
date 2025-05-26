@@ -9,9 +9,14 @@ internal class KafkaMessageProducer : IMessageProducer, IDisposable
 {
     private readonly IProducer<string, string> kafkaHandler;
 
-    public KafkaMessageProducer(IOptions<ProducerConfig> producerConfigOptions)
+    public KafkaMessageProducer(IOptions<KafkaProducerSettings> kafkaProducerSettingsOptions)
     {
-        kafkaHandler = new ProducerBuilder<string, string>(producerConfigOptions.Value).BuildWithInstrumentation();
+        KafkaProducerSettings settings = kafkaProducerSettingsOptions.Value;
+        ProducerConfig config = new()
+        {
+            BootstrapServers = settings.BoostrapServers
+        };
+        kafkaHandler = new ProducerBuilder<string, string>(config).BuildWithInstrumentation();
     }
 
     public Task ProduceAsync(string topic, string key, string value, CancellationToken cancellationToken)
