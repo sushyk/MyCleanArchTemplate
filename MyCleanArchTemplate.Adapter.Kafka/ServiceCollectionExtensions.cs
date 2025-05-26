@@ -10,8 +10,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddKafka(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<ProducerConfig>(configuration.GetSection("Kafka:ProducerSettings"));
+        services.Configure<ConsumerConfig>(configuration.GetSection("Kafka:ConsumerSettings"));
 
-        services.AddSingleton<IMessageProducer, KafkaProducer>();
+        services.AddSingleton<IMessageProducer, KafkaMessageProducer>();
+        services.AddHostedService<KafkaMessageConsumer>();
 
         return services;
     }
