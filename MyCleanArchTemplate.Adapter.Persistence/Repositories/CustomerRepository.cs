@@ -20,7 +20,7 @@ public sealed class CustomerRepository(
     {
         var cacheKey = $"customer-{customerId}";
 
-        string? cachedCustomer = await distributedCache.GetStringAsync(cacheKey);
+        string? cachedCustomer = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
 
         Customer customer;
         if (string.IsNullOrEmpty(cachedCustomer))
