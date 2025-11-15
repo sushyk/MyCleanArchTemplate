@@ -1,6 +1,9 @@
-﻿namespace MyCleanArchTemplate.Adapter.Kafka;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyCleanArchTemplate.Adapter.Kafka;
 
 internal class KafkaProducerSettings
 {
-    public string BoostrapServers { get; set; }
+    [Required]
+    public string BootstrapServers { get; set; }
 }

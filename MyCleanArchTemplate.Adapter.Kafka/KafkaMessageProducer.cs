@@ -14,7 +14,7 @@ internal class KafkaMessageProducer : IMessageProducer, IDisposable
         KafkaProducerSettings settings = kafkaProducerSettingsOptions.Value;
         ProducerConfig config = new()
         {
-            BootstrapServers = settings.BoostrapServers
+            BootstrapServers = settings.BootstrapServers
         };
         kafkaHandler = new ProducerBuilder<string, string>(config).BuildWithInstrumentation();
     }
